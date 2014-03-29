@@ -1,0 +1,34 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d"
+	x:Class="SilverlightApplication2.previewControl"
+	d:DesignWidth="290" d:DesignHeight="550" Loaded="UserControl_Loaded">
+
+	<Grid x:Name="LayoutRoot">
+		<Image Source="Assets/wpout.png" Stretch="Fill"/>
+		<Grid Margin="29,50,33,103">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="0.219*"/>
+				<RowDefinition Height="0.781*"/>
+			</Grid.RowDefinitions>
+			<TextBlock Text="creative layers" FontFamily="Segoe WP Light" FontSize="53.333" Margin="3,-1,-3,1"/>
+			<ListBox x:Name="list_items" Margin="12,8,0,0" Grid.Row="1" BorderThickness="0">
+				<ListBox.ItemTemplate>
+ 					<DataTemplate>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,17">
+                        <!--Replace rectangle with image-->
+                        <Image Height="100" Width="100" Source="{Binding imgLink}" Margin="12,0,9,0"/>
+                        <StackPanel Width="311">
+                            <TextBlock Text="{Binding titleText}" TextWrapping="Wrap" Foreground="{Binding TitleforeColor}"/>
+                            <TextBlock Text="{Binding pubDate}" TextWrapping="Wrap" Margin="12,5,12,0" Foreground="{Binding PubDateforeColor}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>				
+			</ListBox.ItemTemplate>
+			</ListBox>
+		</Grid>
+	</Grid>
+</UserControl>

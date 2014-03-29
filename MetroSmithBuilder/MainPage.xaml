@@ -1,0 +1,109 @@
+﻿<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" xmlns:local="clr-namespace:SilverlightApplication2"
+	xmlns:System="clr-namespace:System;assembly=mscorlib"
+	x:Class="SilverlightApplication2.MainPage" mc:Ignorable="d" d:DesignWidth="1256" d:DesignHeight="773">
+	<UserControl.Resources>
+		<Style x:Key="GridStyle1" TargetType="Grid"/>
+		<Style x:Key="HyperlinkButtonStyle1" TargetType="HyperlinkButton">
+			<Setter Property="Foreground" Value="#FF73A9D8"/>
+			<Setter Property="Padding" Value="2,0,2,0"/>
+			<Setter Property="Cursor" Value="Hand"/>
+			<Setter Property="HorizontalContentAlignment" Value="Left"/>
+			<Setter Property="VerticalContentAlignment" Value="Top"/>
+			<Setter Property="Background" Value="Transparent"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="HyperlinkButton">
+						<Grid Background="{TemplateBinding Background}" Cursor="{TemplateBinding Cursor}">
+							<VisualStateManager.VisualStateGroups>
+								<VisualStateGroup x:Name="CommonStates">
+									<VisualState x:Name="Normal"/>
+									<VisualState x:Name="MouseOver"/>
+									<VisualState x:Name="Pressed"/>
+									<VisualState x:Name="Disabled">
+										<Storyboard>
+											<ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Visibility" Storyboard.TargetName="DisabledOverlay">
+												<DiscreteObjectKeyFrame KeyTime="0">
+													<DiscreteObjectKeyFrame.Value>
+														<Visibility>Visible</Visibility>
+													</DiscreteObjectKeyFrame.Value>
+												</DiscreteObjectKeyFrame>
+											</ObjectAnimationUsingKeyFrames>
+										</Storyboard>
+									</VisualState>
+								</VisualStateGroup>
+								<VisualStateGroup x:Name="FocusStates">
+									<VisualState x:Name="Focused">
+										<Storyboard>
+											<DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="FocusVisualElement"/>
+										</Storyboard>
+									</VisualState>
+									<VisualState x:Name="Unfocused"/>
+								</VisualStateGroup>
+							</VisualStateManager.VisualStateGroups>
+							<TextBlock x:Name="DisabledOverlay" Foreground="#FFAAAAAA" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" Text="{TemplateBinding Content}" Visibility="Collapsed" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Canvas.ZIndex="1"/>
+							<ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+							<Rectangle x:Name="FocusVisualElement" IsHitTestVisible="false" Opacity="0" Stroke="#FF6DBDD1" StrokeThickness="1"/>
+						</Grid>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+	</UserControl.Resources>
+
+	
+
+	  <Grid x:Name="LayoutRoot" Background="White" >
+       
+        
+        <Grid.RowDefinitions>
+        	<RowDefinition Height="180" />
+        	<RowDefinition />
+        	<RowDefinition Height="100" />
+        </Grid.RowDefinitions>
+        
+        <Grid Grid.Row="0" >
+            <StackPanel Orientation="Horizontal">
+                <Grid>
+                    <TextBlock FontFamily="Segoe WP Light" FontSize="64" Margin="100,35,0,40" Text="metro"/>
+                    <TextBlock FontFamily="Segoe WP Light" FontSize="64" Margin="100,0,0,21" Text="smith" Height="69" VerticalAlignment="Bottom"/>
+                </Grid>
+                <Image Source="Assets/lgo.jpg" Margin="10,50,0,15" />
+            </StackPanel>
+        	
+            <HyperlinkButton Margin="0,15,140,0"  Name="logoutBtn" Content="log out" Style="{StaticResource HyperlinkButtonStyle1}" FontFamily="Segoe WP Light" FontSize="25" Foreground="Black" HorizontalAlignment="Right" VerticalAlignment="Center" />
+			<HyperlinkButton Margin="0,15,240,0"  Name="profileBtn" Content="profile" Style="{StaticResource HyperlinkButtonStyle1}" FontFamily="Segoe WP Light" FontSize="25" Foreground="Black" HorizontalAlignment="Right" VerticalAlignment="Center" />
+			<HyperlinkButton Margin="0,15,335,0"  Name="helpBtn" Content="help" Style="{StaticResource HyperlinkButtonStyle1}" FontFamily="Segoe WP Light" FontSize="25" Foreground="Black" HorizontalAlignment="Right" VerticalAlignment="Center" />
+			<HyperlinkButton Margin="0,15,410,0"  Name="historyBtn" Content="history" Style="{StaticResource HyperlinkButtonStyle1}" FontFamily="Segoe WP Light" FontSize="25" Foreground="Black" HorizontalAlignment="Right" VerticalAlignment="Center" />
+        </Grid>
+	  	<Grid Grid.Row="1" Margin="0,0,134,0">
+	  		<Grid.RowDefinitions>
+	  			<RowDefinition Height="100" />
+	  			<RowDefinition Height="Auto" MinHeight="8"/>
+	  		</Grid.RowDefinitions>
+           
+	  		<Grid Grid.Row="0" Margin="100,10,0,0">
+	  			<StackPanel x:Name="stackPanelMain" Orientation="Horizontal" Margin="0,0,0,20">
+	  				<sdk:Label x:Name="contentLabel" Content="content" FontFamily="Segoe WP Light" FontSize="30" Foreground="Black" MouseLeftButtonUp="contentLabel_MouseLeftButtonUp" MouseEnter="contentLabel_MouseEnter" MouseLeave="contentLabel_MouseLeave">
+	  					<i:Interaction.Triggers>
+	  						<i:EventTrigger EventName="MouseLeftButtonDown">
+	  							<ei:GoToStateAction TargetName="userControl1" StateName="ContentState"/>
+	  						</i:EventTrigger>
+	  					</i:Interaction.Triggers>
+	  				</sdk:Label>
+	  				<sdk:Label x:Name="designLabel" Content="design" Margin="30,0,0,0" FontFamily="Segoe WP Light" FontSize="30" Foreground="LightGray" MouseEnter="designLabel_MouseEnter" MouseLeave="designLabel_MouseLeave" MouseLeftButtonUp="designLabel_MouseLeftButtonUp">
+	  					<i:Interaction.Triggers>
+	  						<i:EventTrigger EventName="MouseLeftButtonDown">
+	  							<ei:GoToStateAction TargetName="userControl1" StateName="DesignState"/>
+	  						</i:EventTrigger>
+	  					</i:Interaction.Triggers>
+	  				</sdk:Label>
+	  				<sdk:Label x:Name="finishLabel" Content="finish" Margin="30,0,0,0" FontFamily="Segoe WP Light" FontSize="30" Foreground="LightGray"/>
+	  			</StackPanel>
+	  		</Grid>
+	  		<local:UserControl1 x:Name="userControl1" Margin="100,0,0,0" Grid.Row="1">
+	  			
+	  		</local:UserControl1>
+	  	</Grid>
+        <Grid Grid.Row="2" Background="Gray" />
+    </Grid>
+</UserControl>

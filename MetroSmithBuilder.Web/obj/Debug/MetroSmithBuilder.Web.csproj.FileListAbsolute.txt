@@ -1,0 +1,4 @@
+H:\MetroSmith\MetroSmithBuilder\MetroSmithBuilder.Web\bin\MetroSmithBuilder.Web.dll
+H:\MetroSmith\MetroSmithBuilder\MetroSmithBuilder.Web\bin\MetroSmithBuilder.Web.pdb
+H:\MetroSmith\MetroSmithBuilder\MetroSmithBuilder.Web\obj\Debug\MetroSmithBuilder.Web.dll
+H:\MetroSmith\MetroSmithBuilder\MetroSmithBuilder.Web\obj\Debug\MetroSmithBuilder.Web.pdb

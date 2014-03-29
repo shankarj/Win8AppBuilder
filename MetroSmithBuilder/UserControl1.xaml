@@ -1,0 +1,300 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" xmlns:ee="http://schemas.microsoft.com/expression/2010/effects"
+	xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:local="clr-namespace:SilverlightApplication2"
+	xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
+	mc:Ignorable="d"
+	x:Class="SilverlightApplication2.UserControl1" 
+	d:DesignWidth="1284" d:DesignHeight="561" Loaded="UserControl_Loaded" >
+	<UserControl.Resources>
+		<Style x:Key="HyperlinkButtonStyle1" TargetType="HyperlinkButton">
+			<Setter Property="Foreground" Value="#FF73A9D8"/>
+			<Setter Property="Padding" Value="2,0,2,0"/>
+			<Setter Property="Cursor" Value="Hand"/>
+			<Setter Property="HorizontalContentAlignment" Value="Left"/>
+			<Setter Property="VerticalContentAlignment" Value="Top"/>
+			<Setter Property="Background" Value="Transparent"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="HyperlinkButton">
+						<Grid Background="{TemplateBinding Background}" Cursor="{TemplateBinding Cursor}">
+							<VisualStateManager.VisualStateGroups>
+								<VisualStateGroup x:Name="CommonStates">
+									<VisualState x:Name="Normal"/>
+									<VisualState x:Name="MouseOver"/>
+									<VisualState x:Name="Pressed"/>
+									<VisualState x:Name="Disabled">
+										<Storyboard>
+											<ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Visibility" Storyboard.TargetName="DisabledOverlay">
+												<DiscreteObjectKeyFrame KeyTime="0">
+													<DiscreteObjectKeyFrame.Value>
+														<Visibility>Visible</Visibility>
+													</DiscreteObjectKeyFrame.Value>
+												</DiscreteObjectKeyFrame>
+											</ObjectAnimationUsingKeyFrames>
+										</Storyboard>
+									</VisualState>
+								</VisualStateGroup>
+								<VisualStateGroup x:Name="FocusStates">
+									<VisualState x:Name="Focused">
+										<Storyboard>
+											<DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="FocusVisualElement"/>
+										</Storyboard>
+									</VisualState>
+									<VisualState x:Name="Unfocused"/>
+								</VisualStateGroup>
+							</VisualStateManager.VisualStateGroups>
+							<TextBlock x:Name="DisabledOverlay" Foreground="#FFAAAAAA" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" Text="{TemplateBinding Content}" Visibility="Collapsed" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Canvas.ZIndex="1"/>
+							<ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+							<Rectangle x:Name="FocusVisualElement" IsHitTestVisible="false" Opacity="0" Stroke="#FF6DBDD1" StrokeThickness="1"/>
+						</Grid>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+	</UserControl.Resources>
+
+	<Grid x:Name="LayoutRoot">
+		<VisualStateManager.CustomVisualStateManager>
+			<ei:ExtendedVisualStateManager/>
+		</VisualStateManager.CustomVisualStateManager>
+		<VisualStateManager.VisualStateGroups>
+			<VisualStateGroup x:Name="VisualStateGroup" ei:ExtendedVisualStateManager.UseFluidLayout="True">
+				<VisualStateGroup.Transitions>
+					<VisualTransition GeneratedDuration="0:0:0.9">
+						<ei:ExtendedVisualStateManager.TransitionEffect>
+							<ee:SlideInTransitionEffect/>
+						</ei:ExtendedVisualStateManager.TransitionEffect>
+					</VisualTransition>
+				</VisualStateGroup.Transitions>
+				<VisualState x:Name="ContentState">
+					<Storyboard>
+						<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="ContentGrid">
+							<DiscreteObjectKeyFrame KeyTime="0">
+								<DiscreteObjectKeyFrame.Value>
+									<Visibility>Visible</Visibility>
+								</DiscreteObjectKeyFrame.Value>
+							</DiscreteObjectKeyFrame>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="editSectionGrid">
+							<DiscreteObjectKeyFrame KeyTime="0">
+								<DiscreteObjectKeyFrame.Value>
+									<Visibility>Collapsed</Visibility>
+								</DiscreteObjectKeyFrame.Value>
+							</DiscreteObjectKeyFrame>
+						</ObjectAnimationUsingKeyFrames>
+					</Storyboard>
+				</VisualState>
+				<VisualState x:Name="ManageSectionState">
+					<Storyboard>
+						<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="ManageSectionGrid">
+							<DiscreteObjectKeyFrame KeyTime="0">
+								<DiscreteObjectKeyFrame.Value>
+									<Visibility>Visible</Visibility>
+								</DiscreteObjectKeyFrame.Value>
+							</DiscreteObjectKeyFrame>
+						</ObjectAnimationUsingKeyFrames>
+					</Storyboard>
+				</VisualState>
+			</VisualStateGroup>
+		</VisualStateManager.VisualStateGroups>
+		<Grid Background="White">
+			<Grid x:Name="ContentGrid" Visibility="Collapsed" d:IsHidden="True">
+	  			<Grid.ColumnDefinitions>
+	  				<ColumnDefinition Width="430"/>
+	  				<ColumnDefinition Width="0.662*"/>
+	  			</Grid.ColumnDefinitions>
+	  			<Grid.RowDefinitions>
+	  				<RowDefinition Height="Auto" MinHeight="61"/>
+	  				<RowDefinition Height="0.789*"/>
+	  				<RowDefinition Height="0.211*"/>
+	  			</Grid.RowDefinitions>
+	  			<Image Margin="198,28,174,30" Source="Assets/add.png" Stretch="Fill" x:Name="addClick" Cursor="Hand" Height="30" ToolTipService.ToolTip="Add New Section" d:LayoutOverrides="VerticalAlignment" Width="30" HorizontalAlignment="Left"  >
+	  				<i:Interaction.Triggers>
+	  					<i:EventTrigger EventName="MouseLeftButtonUp">
+	  						<ei:GoToStateAction StateName="ManageSectionState"/>
+	  					</i:EventTrigger>
+	  				</i:Interaction.Triggers>
+	  			</Image>
+	  			<sdk:Label Margin="0,20,218,25" Content="app sections" FontFamily="Segoe WP Light" FontSize="21.333" d:LayoutOverrides="VerticalAlignment"/>
+	  			<ListBox x:Name="listSections" Grid.Row="1" BorderThickness="2" SelectionChanged="listSections_SelectionChanged" HorizontalAlignment="Left" Width="430" Height="373" >
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="20,10,10,10">
+                                    <TextBlock Text="{Binding sectionName}" FontFamily="Segoe WP" FontSize="16" />
+                                    <TextBlock Text="{Binding feedurl}" FontFamily="Segoe WP" FontSize="13" Foreground="LightGray" />
+                                </StackPanel>
+                                <Image Source="{Binding imgName}"  Width="50" Height="50" Margin="350,10,10,10" HorizontalAlignment="Right"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                    
+                </ListBox>
+	  			<Image Height="30" Margin="237,28,125,30" Source="Assets/minus.png" Stretch="Fill" x:Name="minusClick" Cursor="Hand" MouseLeftButtonUp="minusClick_MouseLeftButtonUp" ToolTipService.ToolTip="Delete Section" HorizontalAlignment="Left" Width="30" />
+	  			<Image Height="30" Margin="277,28,96,30" Source="Assets/up.png" Stretch="Fill" x:Name="upClick" Cursor="Hand" MouseLeftButtonUp="upClick_MouseLeftButtonUp" ToolTipService.ToolTip="Move Up" HorizontalAlignment="Left" Width="30" />
+	  			<Image HorizontalAlignment="Left" Height="30" Margin="314,28,0,30" Source="Assets/down.png" Stretch="Fill" Width="30" x:Name="downClick" Cursor="Hand" MouseLeftButtonUp="downClick_MouseLeftButtonUp" ToolTipService.ToolTip="Move Down" />
+	  			<Grid x:Name="editSectionGrid" Grid.Column="1" Margin="40,28,454,0" Grid.RowSpan="2" Width="400" HorizontalAlignment="Left">
+	  				<Border BorderBrush="Gray" BorderThickness="2" Height="433">
+	  					<Grid>
+	  				<sdk:Label Margin="20,10,188,0" Content="edit a section" FontFamily="Segoe WP Light" FontSize="21.333" d:LayoutOverrides="HorizontalAlignment" Width="212" VerticalAlignment="Top"/>
+	  				<Image Height="20" Margin="147,16,0,0" Source="Assets/questionmark.png" Stretch="Fill" x:Name="minusClick_Copy" Cursor="Hand" ToolTipService.ToolTip="Click on a section in the left pane to edit its details" HorizontalAlignment="Left" Width="20" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment" />
+	  				<sdk:Label Margin="20,91,251,0" Content="section name" FontFamily="Segoe WP Light" FontSize="16" VerticalAlignment="Top" Width="125"/>
+	  				<sdk:Label Margin="20,143,251,0" Content="section type" FontFamily="Segoe WP Light" FontSize="16" VerticalAlignment="Top" Width="125"/>
+	  				<sdk:Label Margin="20,197,251,203" Content="feed url" FontFamily="Segoe WP Light" FontSize="16" d:LayoutOverrides="Height" Width="125"/>
+	  				<TextBox x:Name="text_sectionName_edit" Height="29" Margin="163,91,49,0" TextWrapping="Wrap" VerticalAlignment="Top" d:LayoutOverrides="VerticalAlignment"/>
+	  				<TextBox x:Name="text_sectionUrl_edit" Height="29" Margin="163,198,49,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+	  				<ComboBox x:Name="combolist" Height="31" Margin="163,141,48,0" VerticalAlignment="Top">
+	  					<ComboBoxItem Content="Facebook"/>
+	  					<ComboBoxItem Content="Twitter"/>
+	  					<ComboBoxItem Content="Picasa"/>
+	  					<ComboBoxItem Content="Flickr"/>
+	  				</ComboBox>
+	  				<HyperlinkButton x:Name="editOk" Click="editOk_Click" Content="update" HorizontalAlignment="Left" Margin="20,0,0,138" Style="{StaticResource HyperlinkButtonStyle1}" FontFamily="Segoe WP Light" FontSize="21.333" Foreground="Black" VerticalAlignment="Bottom">
+	  					
+	  				</HyperlinkButton>
+	  				<HyperlinkButton x:Name="canceledit" Click="canceledit_Click" Content="cancel" HorizontalAlignment="Left" Margin="104,0,0,138" Style="{StaticResource HyperlinkButtonStyle1}" FontFamily="Segoe WP Light" FontSize="21.333" Foreground="Black" VerticalAlignment="Bottom">
+	  					
+	  				</HyperlinkButton>
+									
+						</Grid>		
+					
+	  				</Border>
+	  			</Grid>
+	  			<Image HorizontalAlignment="Left" Height="30" Margin="352,28,0,30" Source="Assets/edit.png" Stretch="Fill" Width="30" x:Name="editClick" Cursor="Hand" MouseLeftButtonUp="editClick_MouseLeftButtonUp"  ToolTipService.ToolTip="Edit Section Details" />
+        		     	
+	  		</Grid>
+            <Popup x:Name="genPopup"  VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalOffset="-80" VerticalOffset="-60" d:IsHidden="True">
+				
+					<Grid Background="#FFEB4E1F">
+						<StackPanel Margin="10">
+							<TextBlock Name="popMsg" Text="asdasdasd" Margin="10" FontFamily="Segoe WP Light" FontSize="26.667" Foreground="White" Width="300" TextWrapping="Wrap" />
+                            <StackPanel Orientation="Horizontal" Name="stackButtons">
+                                <HyperlinkButton Margin="10" Name="okbtn" Content="sure" Style="{StaticResource HyperlinkButtonStyle1}" FontFamily="Segoe WP Light" FontSize="16" Foreground="White" Click="okbtn_Click"/>
+                                <HyperlinkButton Margin="10" Name="cancelbtn" Content="cancel" Style="{StaticResource HyperlinkButtonStyle1}" FontFamily="Segoe WP Light" FontSize="16" Foreground="White" Click="cancelbtn_Click"/>
+                            </StackPanel>
+							<ListBox Name="lbox" Background="Transparent" BorderThickness="0" FontFamily="Segoe WP Light" FontSize="20" Foreground="White" SelectionChanged="lbox_SelectionChanged" >
+								<ListBoxItem Margin="10">
+									<StackPanel Orientation="Horizontal">
+										<TextBlock Text="Create New Section" />
+										<Image Source="Assets/addw.png" Width="25" Margin="100,0,0,0" />
+										
+									</StackPanel>
+								</ListBoxItem>
+
+								<ListBoxItem Margin="10">
+									<i:Interaction.Triggers>
+										<i:EventTrigger EventName="MouseLeftButtonUp">
+											<ei:GoToStateAction StateName="ContentState"/>
+										</i:EventTrigger>
+									</i:Interaction.Triggers>
+									<StackPanel Orientation="Horizontal">
+										<TextBlock Text="Manage Sections" />
+										<Image Source="Assets/settings.png" Width="25" Margin="123,0,0,0" />
+									</StackPanel>
+								</ListBoxItem>
+							</ListBox>
+						
+						</StackPanel>
+					</Grid>
+		
+				
+			</Popup>
+            <Grid x:Name="ManageSectionGrid" Visibility="Collapsed" d:IsHidden="True">
+            	<Grid.ColumnDefinitions>
+            		<ColumnDefinition Width="Auto" MinWidth="481"/>
+            		<ColumnDefinition/>
+            	</Grid.ColumnDefinitions>
+            	<Grid.RowDefinitions>
+            		<RowDefinition Height="Auto" MinHeight="61"/>
+            		<RowDefinition Height="0.789*"/>
+            		<RowDefinition Height="0.211*"/>
+            	</Grid.RowDefinitions>
+            	<HyperlinkButton Content="news" HorizontalAlignment="Left" Margin="0,18,0,21" Style="{StaticResource HyperlinkButtonStyle1}" FontFamily="Segoe WP Light" FontSize="21.333" Foreground="Black" d:LayoutOverrides="Height">
+            		<i:Interaction.Triggers>
+            			<i:EventTrigger EventName="Click">
+            				<ei:GoToStateAction TargetName="tLoader" StateName="newsState"/>
+            			</i:EventTrigger>
+            		</i:Interaction.Triggers>
+            	</HyperlinkButton>
+        		     	
+            	<Grid x:Name="feedDetailsGrid" Margin="0,127,0,25" Grid.Row="1" Visibility="Collapsed">
+            		<sdk:Label x:Name="titleLabel_Copy" Margin="0,1,313,197" Content="section name" FontFamily="Segoe WP Light" FontSize="16"/>
+            		<sdk:Label x:Name="titleLabel_Copy1" Margin="0,52,313,146" Content="feed url" FontFamily="Segoe WP Light" FontSize="16"/>
+            		<TextBox x:Name="text_sectionName" Height="29" Margin="121,6,169,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+            		<TextBox x:Name="text_sectionFeedUrl" Margin="121,57,169,0" TextWrapping="Wrap" Height="29" VerticalAlignment="Top"/>
+            		<Image x:Name="img_type" HorizontalAlignment="Right" Height="70" Stretch="Fill" VerticalAlignment="Bottom" Width="70" Margin="0,0,37,151"/>
+            		<HyperlinkButton x:Name="link_create" Content="create" HorizontalAlignment="Left" Margin="0,0,0,89" Style="{StaticResource HyperlinkButtonStyle1}" FontFamily="Segoe WP Light" FontSize="16" Foreground="Black" VerticalAlignment="Bottom" Click="link_create_Click"/>
+            		<HyperlinkButton x:Name="link_clear" Content="clear" Style="{StaticResource HyperlinkButtonStyle1}" FontFamily="Segoe WP Light" FontSize="16" Foreground="Black" HorizontalAlignment="Left" Margin="82,0,0,89" VerticalAlignment="Bottom" Click="link_clear_Click"/>
+            		<HyperlinkButton x:Name="link_cancel" Content="cancel" Style="{StaticResource HyperlinkButtonStyle1}" FontFamily="Segoe WP Light" FontSize="16" Foreground="Black" HorizontalAlignment="Left" Margin="147,0,0,89" VerticalAlignment="Bottom" Click="link_cancel_Click"/>
+            	</Grid>
+            	<local:tilesLoader x:Name="tLoader" Height="100" Margin="0,8,-319,0" Grid.Row="1" VerticalAlignment="Top" clickedAnImage="tLoader_clickedAnImage"/>
+            	<HyperlinkButton Content="image" HorizontalAlignment="Left" Margin="81,18,0,21" Style="{StaticResource HyperlinkButtonStyle1}" FontFamily="Segoe WP Light" FontSize="21.333" Foreground="Black" d:LayoutOverrides="Height">
+            		<i:Interaction.Triggers>
+            			<i:EventTrigger EventName="Click">
+            				<ei:GoToStateAction TargetName="tLoader" StateName="imgState"/>
+            			</i:EventTrigger>
+            		</i:Interaction.Triggers>
+            	</HyperlinkButton>
+            	<HyperlinkButton Content="audio" HorizontalAlignment="Left" Margin="177,18,0,21" Style="{StaticResource HyperlinkButtonStyle1}" FontFamily="Segoe WP Light" FontSize="21.333" Foreground="Black" d:LayoutOverrides="Height">
+            		<i:Interaction.Triggers>
+            			<i:EventTrigger EventName="Click">
+            				<ei:GoToStateAction TargetName="tLoader" StateName="audioState"/>
+            			</i:EventTrigger>
+            		</i:Interaction.Triggers>
+            	</HyperlinkButton>
+            	<HyperlinkButton Content="video" HorizontalAlignment="Right" Margin="0,18,154,21" Style="{StaticResource HyperlinkButtonStyle1}" FontFamily="Segoe WP Light" FontSize="21.333" Foreground="Black" d:LayoutOverrides="Height">
+            		<i:Interaction.Triggers>
+            			<i:EventTrigger EventName="Click">
+            				<ei:GoToStateAction TargetName="tLoader" StateName="videoState"/>
+            			</i:EventTrigger>
+            		</i:Interaction.Triggers>
+            	</HyperlinkButton>
+        		     	
+            </Grid>
+            <Grid x:Name="designGrid">
+
+	  			<Grid.ColumnDefinitions>
+	  				<ColumnDefinition Width="430"/>
+	  				<ColumnDefinition Width="0.662*"/>
+	  			</Grid.ColumnDefinitions>
+	  			<Grid.RowDefinitions>
+	  				<RowDefinition Height="Auto" MinHeight="61"/>
+	  				<RowDefinition Height="0.789*"/>
+	  				<RowDefinition Height="0.211*"/>
+	  			</Grid.RowDefinitions>
+	  			
+				<sdk:Label Margin="0,20,218,25" Content="app artwork" FontFamily="Segoe WP Light" FontSize="21.333" d:LayoutOverrides="VerticalAlignment"/>
+				
+				
+				<sdk:Label Margin="0,40,218,315" Content="small application tile" FontFamily="Segoe WP Light" FontSize="21.333" Grid.Row="1"/>
+				<HyperlinkButton Name="smalltileBtn"  Click="smalltileBtn_Click" Content="click to upload" Style="{StaticResource HyperlinkButtonStyle1}" FontFamily="Segoe WP Light" FontSize="18" Foreground="#FF1F37BE" Margin="0,44,89,0" VerticalAlignment="Top" Grid.Row="1" HorizontalAlignment="Right" d:LayoutOverrides="HorizontalAlignment" Background="Transparent" />
+				
+				<sdk:Label Margin="0,90,218,265" Content="large application tile" FontFamily="Segoe WP Light" FontSize="21.333" Grid.Row="1"/>
+				
+				<sdk:Label Margin="0,142,218,213" Content="marketplace tile" FontFamily="Segoe WP Light" FontSize="21.333" Grid.Row="1"/>
+	  			
+				<sdk:Label Margin="0,194,218,161" Content="application icon" FontFamily="Segoe WP Light" FontSize="21.333" Grid.Row="1"/>
+	  			
+				<sdk:Label Margin="0,248,218,107" Content="splash screen" FontFamily="Segoe WP Light" FontSize="21.333" Grid.Row="1"/>
+				<HyperlinkButton x:Name="historyBtn_Copy" Content="click to upload" Style="{StaticResource HyperlinkButtonStyle1}" FontFamily="Segoe WP Light" FontSize="18" Foreground="#FF1F37BE" Margin="0,95,89,0" VerticalAlignment="Top" Grid.Row="1" HorizontalAlignment="Right" d:LayoutOverrides="HorizontalAlignment" Background="Transparent" />
+				<HyperlinkButton x:Name="historyBtn_Copy1" Content="click to upload" Style="{StaticResource HyperlinkButtonStyle1}" FontFamily="Segoe WP Light" FontSize="18" Foreground="#FF1F37BE" Margin="0,147,89,0" VerticalAlignment="Top" Grid.Row="1" HorizontalAlignment="Right" d:LayoutOverrides="HorizontalAlignment" Background="Transparent" />
+				<HyperlinkButton x:Name="historyBtn_Copy2" Content="click to upload" Style="{StaticResource HyperlinkButtonStyle1}" FontFamily="Segoe WP Light" FontSize="18" Foreground="#FF1F37BE" Margin="0,0,89,161" VerticalAlignment="Bottom" Grid.Row="1" HorizontalAlignment="Right" d:LayoutOverrides="HorizontalAlignment" Background="Transparent" />
+				<HyperlinkButton x:Name="historyBtn_Copy3" Content="click to upload" Style="{StaticResource HyperlinkButtonStyle1}" FontFamily="Segoe WP Light" FontSize="18" Foreground="#FF1F37BE" Margin="0,0,89,107" VerticalAlignment="Bottom" Grid.Row="1" HorizontalAlignment="Right" d:LayoutOverrides="HorizontalAlignment" Background="Transparent" />
+				<Image HorizontalAlignment="Left" Height="15" Margin="185,49,0,0" Source="Assets/questionmark.png" Stretch="Fill" Width="15" x:Name="editClick_Copy" Cursor="Hand" MouseLeftButtonUp="editClick_MouseLeftButtonUp"  ToolTipService.ToolTip="99x99 pixels. PNG Format." Grid.Row="1" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment" />
+				<Image HorizontalAlignment="Left" Height="15" Margin="185,101,0,0" Source="Assets/questionmark.png" Stretch="Fill" Width="15" x:Name="editClick_Copy1" Cursor="Hand" MouseLeftButtonUp="editClick_MouseLeftButtonUp"  ToolTipService.ToolTip="173x173 pixels. PNG Format." Grid.Row="1" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment" />
+				<Image HorizontalAlignment="Left" Height="15" Margin="145,151,0,0" Source="Assets/questionmark.png" Stretch="Fill" Width="15" x:Name="editClick_Copy2" Cursor="Hand" MouseLeftButtonUp="editClick_MouseLeftButtonUp"  ToolTipService.ToolTip="200x200 pixels. PNG Format." Grid.Row="1" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment" />
+				<Image HorizontalAlignment="Left" Margin="145,0,0,164" Source="Assets/questionmark.png" Stretch="Fill" Width="15" x:Name="editClick_Copy3" Cursor="Hand" MouseLeftButtonUp="editClick_MouseLeftButtonUp"  ToolTipService.ToolTip="62x62 pixels. PNG Format." Grid.Row="1" d:LayoutOverrides="HorizontalAlignment" Height="15" VerticalAlignment="Bottom" />
+				<Image HorizontalAlignment="Left" Margin="123,0,0,110" Source="Assets/questionmark.png" Stretch="Fill" Width="15" x:Name="editClick_Copy4" Cursor="Hand" MouseLeftButtonUp="editClick_MouseLeftButtonUp"  ToolTipService.ToolTip="480x800 pixels. JPG Format." Grid.Row="1" d:LayoutOverrides="HorizontalAlignment" Height="15" VerticalAlignment="Bottom" />
+									
+			</Grid>		
+					
+	  			</Grid>
+	  			   
+			</Grid>
+		
+	
+</UserControl>
